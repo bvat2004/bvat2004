@@ -1,0 +1,46 @@
+int relay = 7;
+int inputPir = 9;
+int pirVal = 0;
+int resultLDR = 0;
+int LDR = A4;
+int ledPin = 5;
+
+void setup()
+{
+pinMode(relay, OUTPUT);
+pinMode(inputPir, INPUT);
+pinMode(LDR, INPUT);
+pinMode(ledPin, OUTPUT);
+Serial.begin(9600);
+delay(3000);
+}
+
+void loop()
+{
+
+int pirVal = digitalRead(inputPir);
+resultLDR = analogRead(LDR);
+
+Serial.print("pir = ");
+Serial.print(pirVal);
+Serial.print("       LDR = ");
+Serial.println(resultLDR);
+
+  if(resultLDR<200){
+  
+    if(pirVal == HIGH){
+      digitalWrite(relay, LOW);
+      digitalWrite(ledPin, HIGH);
+      Serial.print("Pir_val = ");
+      Serial.println(pirVal);
+      delay(15000);
+      
+    }else{
+    digitalWrite(relay, HIGH);
+    digitalWrite(ledPin, LOW);
+    delay(1000);
+    }
+  }
+  digitalWrite(relay, HIGH);
+  digitalWrite(ledPin, LOW);
+}
